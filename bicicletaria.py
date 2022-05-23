@@ -1,17 +1,48 @@
 BICICLETARIA = {}
+#BICICLETARIA = {'001': {'nome': 'pedal', 'fabricante': 'shimano', 'valor': '87'},
+#                '002': {'nome': 'banco v3', 'fabricante': 'shimano', 'valor': '23'},
+#                '003': {'nome': 'pedal', 'fabricante': 'caloi', 'valor': '332'}}
+
+name = input('Digite seu nome: ')
+
+def menu_consulta():
+    print('######################################################')
+    print('## 1 - Consultar Todas as Peças                     ##')
+    print('## 2 - Consultar Peças por Código                   ##')
+    print('## 3 - Consultar Peças por Fabricante               ##')
+    print('## 4 - Retornar                                     ##')
+    print('######################################################')
+
+def consultar_pecas():
+    while True:
+        menu_consulta()
+
+        opcao = input('Escolha uma opção: ')
+
+        if opcao == '1':
+            mostrar_pecas()
+        elif opcao == '2':
+            codigo = input('Digite o código da peça para consulta: ')
+            buscar_pecas(codigo)
+        elif opcao == '3':
+            pass
+        elif opcao == '4':
+            imprimir_menu()
+            break
 
 def mostrar_pecas():
     if BICICLETARIA:
-        for pecas in BICICLETARIA:
-            buscar_pecas(pecas)
+        for codigo in BICICLETARIA:
+            buscar_pecas(codigo)
     else:
         print('>>>>> Bicicletaria Vazia')
 
-def buscar_pecas(pecas):
+def buscar_pecas(codigo):
     try:
-        print('Nome:', pecas)
-        print('Fabricante:', BICICLETARIA[pecas]['fabricante'])
-        print('Valor:', BICICLETARIA[pecas]['valor'])
+        print('Código:', codigo)
+        print('Nome:', BICICLETARIA[codigo]['nome'])
+        print('Fabricante:', BICICLETARIA[codigo]['fabricante'])
+        print('Valor:', BICICLETARIA[codigo]['valor'])
         print('######################################')
     except KeyError:
         print('>>>>> Peça Inexistente')
@@ -19,11 +50,23 @@ def buscar_pecas(pecas):
         print('>>>>> Um erro inesperado ocorreu')
         print(error)
 
+def buscar_fabricante(fabricante):
+    try:
+        print('Código:', codigo)
+        print('Nome:', BICICLETARIA[codigo]['nome'])
+        print('Fabricante:', fabricante)
+        print('Valor:', BICICLETARIA[codigo]['valor'])
+        print('######################################')
+    except KeyError:
+        print('>>>>> Peças Inexistente')
+    except Exception as error:
+        print('>>>>> Um erro inesperado ocorreu')
+        print(error)
 
 def ler_detalhes_contato():
-    nome = input('Digite o telefone de contato: ')
-    fabricante = input('Digite o email de contato: ')
-    valor = input('Digite o endereço de contato: ')
+    nome = input('Digite o nome da peça: ')
+    fabricante = input('Digite o fabricante da peça: ')
+    valor = input('Digite o valor da peça: ')
     return (nome, fabricante, valor)
 
 
@@ -50,14 +93,15 @@ def excluir_peca(codigo):
         print(error)
 
 def imprimir_menu():
-    print('#############################################')
-    print('## 1 - Mostrar todos os contatos da agenda ##')
-    print('## 2 - Buscar contato                      ##')
-    print('## 3 - incluir contato                     ##')
-    print('## 4 - Editar contato                      ##')
-    print('## 5 - Excluir contato                     ##')
-    print('## 0 - Fechar agenda                       ##')
-    print('#############################################')
+
+    print("Bem vindo ao Controle de Estoque da BiciCletaria do {}".format(name))
+    print('######################################################')
+    print('## 1 - Consultar Peça                               ##')
+    print('## 2 - incluir Peça                                 ##')
+    print('## 3 - Editar Peça                                  ##')
+    print('## 4 - Excluir Peça                                 ##')
+    print('## 0 - Fechar Bicicletaria                          ##')
+    print('######################################################')
 
 while True:
 
@@ -66,11 +110,8 @@ while True:
     opcao = input('Escolha uma opção: ')
 
     if opcao == '1':
-        mostrar_pecas()
+       consultar_pecas()
     elif opcao == '2':
-        peca = input('Digite o nome do contato: ')
-        buscar_pecas(peca)
-    elif opcao == '3':
         codigo = input('Digite o código da peça: ')
 
         try:
@@ -81,21 +122,21 @@ while True:
             nome, fabricante, valor = ler_detalhes_contato()
             incluir_editar_peca(codigo, nome, fabricante, valor)
 
-    elif opcao == '4':
-        codigo = input('Digite o nome do contato: ')
+    elif opcao == '3':
+        codigo = input('Digite o código da peça: ')
 
         try:
             BICICLETARIA[codigo]
-            print('>>>>> Editando peça', codigo)
+            print('>>>>> Editando peça de código ', codigo)
 
             nome, fabricante, valor = ler_detalhes_contato()
             incluir_editar_peca(codigo, nome, fabricante, valor)
 
         except KeyError:
-            print('>>>>>> Contato inexistente')
+            print('>>>>>> Peça inexistente')
 
 
-    elif opcao == '5':
+    elif opcao == '4':
         codigo = input('Digite o código da peça: ')
         excluir_peca(codigo)
 
