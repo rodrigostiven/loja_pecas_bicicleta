@@ -1,9 +1,7 @@
 BICICLETARIA = {}
-#BICICLETARIA = {'001': {'nome': 'pedal', 'fabricante': 'shimano', 'valor': '87'},
-#                '002': {'nome': 'banco v3', 'fabricante': 'shimano', 'valor': '23'},
-#                '003': {'nome': 'pedal', 'fabricante': 'caloi', 'valor': '332'}}
 
 name = input('Digite seu nome: ')
+
 
 def menu_consulta():
     print('######################################################')
@@ -50,19 +48,6 @@ def buscar_pecas(codigo):
         print('>>>>> Um erro inesperado ocorreu')
         print(error)
 
-def buscar_fabricante(fabricante):
-    try:
-        print('Código:', codigo)
-        print('Nome:', BICICLETARIA[codigo]['nome'])
-        print('Fabricante:', fabricante)
-        print('Valor:', BICICLETARIA[codigo]['valor'])
-        print('######################################')
-    except KeyError:
-        print('>>>>> Peças Inexistente')
-    except Exception as error:
-        print('>>>>> Um erro inesperado ocorreu')
-        print(error)
-
 def ler_detalhes_contato():
     nome = input('Digite o nome da peça: ')
     fabricante = input('Digite o fabricante da peça: ')
@@ -94,7 +79,7 @@ def excluir_peca(codigo):
 
 def imprimir_menu():
 
-    print("Bem vindo ao Controle de Estoque da BiciCletaria do {}".format(name))
+    print("Bem vindo ao Controle de Estoque da Bicicletaria do {}".format(name))
     print('######################################################')
     print('## 1 - Consultar Peça                               ##')
     print('## 2 - incluir Peça                                 ##')
